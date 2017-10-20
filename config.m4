@@ -1,0 +1,10 @@
+PHP_ARG_ENABLE(zndq, whether to enable ZNDq support, [ --enable-zndq   Enable ZNDq support])
+
+src=.
+epeios=../../stable
+
+if test "$PHP_ZNDQ" = "yes"; then
+  PHP_REQUIRE_CXX()
+  AC_DEFINE(HAVE_ZNDQ, 1, [Whether you have ZNDq])
+  PHP_NEW_EXTENSION(zndq, "src/zndq.cpp" "src/epeios/dlbrry.cpp" "src/epeios/n4all.cpp" "src/epeios/n4allw.cpp" "src/epeios/n4znd.cpp" "src/epeios/plgn.cpp" "src/epeios/plgncore.cpp" "src/epeios/ags.cpp" "src/epeios/aem.cpp" "src/epeios/bch.cpp" "src/epeios/bitbch.cpp" "src/epeios/bomhdl.cpp" "src/epeios/bso.cpp" "src/epeios/cdgb64.cpp" "src/epeios/cio.cpp" "src/epeios/cpe.cpp" "src/epeios/crptgr.cpp" "src/epeios/cslio.cpp" "src/epeios/crt.cpp" "src/epeios/ctn.cpp" "src/epeios/dir.cpp" "src/epeios/dte.cpp" "src/epeios/dtfbsc.cpp" "src/epeios/dtfptb.cpp" "src/epeios/epsmsc.cpp" "src/epeios/err.cpp" "src/epeios/fdr.cpp" "src/epeios/fil.cpp" "src/epeios/flf.cpp" "src/epeios/flsq.cpp" "src/epeios/flw.cpp" "src/epeios/flx.cpp" "src/epeios/fnm.cpp" "src/epeios/ias.cpp" "src/epeios/idsq.cpp" "src/epeios/iof.cpp" "src/epeios/iop.cpp" "src/epeios/lcl.cpp" "src/epeios/lck.cpp" "src/epeios/lst.cpp" "src/epeios/lstbch.cpp" "src/epeios/lstcrt.cpp" "src/epeios/lstctn.cpp" "src/epeios/mns.cpp" "src/epeios/mtk.cpp" "src/epeios/mtx.cpp" "src/epeios/ntvstr.cpp" "src/epeios/que.cpp" "src/epeios/rgstry.cpp" "src/epeios/sdr.cpp" "src/epeios/stkbse.cpp" "src/epeios/stkbch.cpp" "src/epeios/stkcrt.cpp" "src/epeios/stkctn.cpp" "src/epeios/str.cpp" "src/epeios/strng.cpp" "src/epeios/stsfsm.cpp" "src/epeios/tagsbs.cpp" "src/epeios/tht.cpp" "src/epeios/thtsub.cpp" "src/epeios/tol.cpp" "src/epeios/txf.cpp" "src/epeios/tys.cpp" "src/epeios/uys.cpp" "src/epeios/utf.cpp" "src/epeios/xml.cpp" "src/epeios/xpp.cpp" "src/epeios/xtf.cpp" "src/epeios/llio.cpp" "src/epeios/sclargmnt.cpp" "src/epeios/sclmisc.cpp" "src/epeios/sclerror.cpp" "src/epeios/scllocale.cpp" "src/epeios/sclrgstry.cpp" "src/main.cpp" "src/registry.cpp" , $ext_shared,, [-std=gnu++11 -Isrc/epeios/ -Isrc/ -DVERSION=20171019] )
+fi
