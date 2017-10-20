@@ -17,7 +17,11 @@ install:
 - cinst php
 
 before_build:
+- dir
 - dir C:\tools\php71
+- curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
+- 7z x php.tgz
+- 7z x php.tar
 
 test_script:
 - php test.php
