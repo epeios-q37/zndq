@@ -13,7 +13,7 @@ script:
 - phpize
 - ./configure
 - make -j 20
-- php -dextension=modules/zend.so test.php
+- php -dextension=modules/zndq.so test.php
 
 # To disable building on tags. Tags are supposed to begin with 'v' and only containing digits.
 branches:

@@ -17,6 +17,7 @@ install:
 - cinst php
 
 test_script:
+- dir C:\tools\php71
 - php test.php
 
 # matrix:
