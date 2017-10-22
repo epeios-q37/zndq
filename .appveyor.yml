@@ -22,6 +22,11 @@ before_build:
 - curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
 - 7z x php.tgz
 - 7z x php.tar
+- cd php-src-php-7.1.10
+- buildconf.bat --add-modules-dir=c:\projects\zndq
+- configure.bat
+- dir
+- cd ..
 
 test_script:
 - php test.php
