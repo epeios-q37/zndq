@@ -3,20 +3,22 @@ environment:
   affix: zndq
 
 platform:
-- x86
+# - x86
 - x64
 
 configuration: Release
 
 os :
-- Visual Studio 2017
+# - Visual Studio 2017
 - Visual Studio 2015
-- Visual Studio 2013
+# - Visual Studio 2013
 
 install:
 - cinst php
 
 before_build:
+- call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+- call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 - dir
 - dir C:\tools\php71
 - curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
