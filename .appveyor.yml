@@ -3,7 +3,7 @@ environment:
   affix: zndq
 
 platform:
-# - x86
+- x86
 - x64
 
 configuration: Release
@@ -56,8 +56,8 @@ after_build:
 - copy %affix%.dll %dir%
 - 7z a %target%.zip %dir%
 
-# artifacts:
-# - path: '*.zip'
+artifacts:
+- path: '*.zip'
 
 deploy:
   tag: v$(version)
@@ -68,6 +68,5 @@ deploy:
   draft: false
   prerelease: false
   on:
-   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-
+   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
