@@ -23,12 +23,16 @@ before_build:
 - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 - dir
 - dir C:\tools\php71
+- dir C:\tools\php71\dev
 - curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
 - 7z x php.tgz
 - 7z x php.tar
 - cd php-src-php-7.1.10
 - buildconf.bat --add-modules-dir=c:\projects\zndq
 - configure.bat
+# We do not build from the source (no 'nmake'), as we use the already installed PHP binaries.
+# 'build.conf' and 'configure.bat' are only launched to generate some files needed
+# to compilation the extension (namely 'main/config.w32.h').
 - dir
 - cd ..
 

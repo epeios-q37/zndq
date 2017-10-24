@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xpp="http://q37.info/xppq" DefaultTargets="Build">
   <PropertyGroup Label="UserMacros">
     <PHPSrc>php-src-php-7.1.10</PHPSrc>
-    <PHP>c:\php</PHP>
+    <PHP>C:\tools\php71</PHP>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -25,7 +25,7 @@
   <Import Project="Windows.targets"/>
   <Import Project="Details.props"/>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>20108cec-d370-4215-b3e3-8be51090fa65</ProjectGuid>
+    <ProjectGuid>7a18b3db-5cad-4f02-aa93-90c4f50f43f6</ProjectGuid>
     <RootNamespace>zndq</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
@@ -46,7 +46,7 @@
   </ImportGroup>
   <PropertyGroup>
     <IncludePath>$(PHPSrc);$(PHPSrc)\main;$(PHPSrc)\zend;$(PHPSrc)\TSRM;$(IncludePath)src/epeios;$(IncludePath)</IncludePath>
-    <LibraryPath>$(PHP)/dev/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(PHP)\dev;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <PreBuildEvent/>
