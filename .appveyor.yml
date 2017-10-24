@@ -53,7 +53,7 @@ after_build:
 - echo .%target%.
 - set dir=%target%
 - mkdir %dir%
-- copy %affix%.exe %dir%
+- copy %affix%.dll %dir%
 - 7z a %target%.zip %dir%
 
 # artifacts:
