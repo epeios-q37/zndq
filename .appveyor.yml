@@ -37,7 +37,7 @@ before_build:
 - cd ..
 
 test_script:
-- php test.php
+- C:\tools\php71\php test.php
 
 # matrix:
   # allow_failures:
