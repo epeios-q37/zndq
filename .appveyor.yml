@@ -14,7 +14,8 @@ os :
 - Visual Studio 2013
 
 install:
-- cinst php
+- ps: Set-Service wuauserv -StartupType Manual
+- cinst -y php
 
 # before_build:
 # - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
