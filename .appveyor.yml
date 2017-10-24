@@ -3,7 +3,9 @@ environment:
   affix: zndq
 
 platform:
-- x86
+# By default, it's the AMD64(/x64) version of PHP which is installed.
+# Have to search how to change this.
+# - x86
 - x64
 
 configuration: Release
