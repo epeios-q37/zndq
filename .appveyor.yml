@@ -3,65 +3,65 @@ environment:
   affix: zndq
 
 platform:
-# - x86
+- x86
 - x64
 
 configuration: Release
 
 os :
-# - Visual Studio 2017
+- Visual Studio 2017
 - Visual Studio 2015
-# - Visual Studio 2013
+- Visual Studio 2013
 
 install:
 - cinst php
 
-before_build:
-- call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
-- call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-- dir
-- dir C:\tools\php71
-- curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
-- 7z x php.tgz
-- 7z x php.tar
-- cd php-src-php-7.1.10
-- buildconf.bat --add-modules-dir=c:\projects\zndq
-- configure.bat
-- dir
-- cd ..
+# before_build:
+# - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+# - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+# - dir
+# - dir C:\tools\php71
+# - curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
+# - 7z x php.tgz
+# - 7z x php.tar
+# - cd php-src-php-7.1.10
+# - buildconf.bat --add-modules-dir=c:\projects\zndq
+# - configure.bat
+# - dir
+# - cd ..
 
-test_script:
-- php test.php
+# test_script:
+# - php test.php
 
-# matrix:
-  # allow_failures:
-  # - os: Visual Studio 2017
+# # matrix:
+  # # allow_failures:
+  # # - os: Visual Studio 2017
   
-skip_tags: true  
+# skip_tags: true  
   
-after_build:
-- echo | set /p="%affix%-v%version%" >>tmpfile.tmp || true
-- echo | set /p="-win-" >>tmpfile.tmp || true
-- echo | set /p="%platform%" >>tmpfile.tmp || true
-- set /p target= <tmpfile.tmp
-- echo .%target%.
-- set dir=%target%
-- mkdir %dir%
-- copy %affix%.exe %dir%
-- 7z a %target%.zip %dir%
+# after_build:
+# - echo | set /p="%affix%-v%version%" >>tmpfile.tmp || true
+# - echo | set /p="-win-" >>tmpfile.tmp || true
+# - echo | set /p="%platform%" >>tmpfile.tmp || true
+# - set /p target= <tmpfile.tmp
+# - echo .%target%.
+# - set dir=%target%
+# - mkdir %dir%
+# - copy %affix%.exe %dir%
+# - 7z a %target%.zip %dir%
 
-# artifacts:
-# - path: '*.zip'
+# # artifacts:
+# # - path: '*.zip'
 
-deploy:
-  tag: v$(version)
-  description: ''
-  provider: GitHub
-  auth_token:
-    secure: kKebvPLjikQbZ7E1Vm8omoYc9K0wOcKxjWsglp3+D4fV9ev/FaWr8ZBI+AseOTis
-  draft: false
-  prerelease: false
-  on:
-   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+# deploy:
+  # tag: v$(version)
+  # description: ''
+  # provider: GitHub
+  # auth_token:
+    # secure: kKebvPLjikQbZ7E1Vm8omoYc9K0wOcKxjWsglp3+D4fV9ev/FaWr8ZBI+AseOTis
+  # draft: false
+  # prerelease: false
+  # on:
+   # APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
 
