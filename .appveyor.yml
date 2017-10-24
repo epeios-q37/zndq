@@ -31,8 +31,8 @@ before_build:
 - buildconf.bat --add-modules-dir=c:\projects\zndq
 - configure.bat
 # We do not build from the source (no 'nmake'), as we use the already installed PHP binaries.
-# 'build.conf' and 'configure.bat' are only launched to generate some files needed
-# to compilation the extension (namely 'main/config.w32.h').
+# 'buildconf.bat' and 'configure.bat' are only launched to generate some files needed
+# to compile the extension (namely 'main/config.w32.h').
 - dir
 - cd ..
 
