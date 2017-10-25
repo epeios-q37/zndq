@@ -1,5 +1,5 @@
 environment:
-  version: 20171024
+  version: 20171025
   affix: zndq
 
 platform:
@@ -39,7 +39,7 @@ before_build:
 - cd ..
 
 test_script:
-- C:\tools\php71\php -dextension=./zndq.dll test.php
+- echo "***** 'ZNDq' TEST BEGIN *****" && C:\tools\php71\php -dextension=./zndq.dll test.php && echo "***** 'ZNDq' TEST END *****"
 
 # matrix:
   # allow_failures:

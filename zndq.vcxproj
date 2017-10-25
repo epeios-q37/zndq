@@ -25,7 +25,7 @@
   <Import Project="Windows.targets"/>
   <Import Project="Details.props"/>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>0d00259c-7502-43de-b452-bc5df72fbc18</ProjectGuid>
+    <ProjectGuid>d394a10e-2a12-4da4-9a2b-fb7ac8e319c3</ProjectGuid>
     <RootNamespace>zndq</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
@@ -54,7 +54,7 @@
       <Command>copy $(TargetPath) $(ProjectDir)</Command>
     </PostBuildEvent>
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CI;APPVEYOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
