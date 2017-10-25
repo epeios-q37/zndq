@@ -2,7 +2,7 @@
     "name": "q37/zndq",
     "type": "library",
     "description": "PHP extension wrapper",
-	"keywords": ["addon","native","C++","zndq","wrapper","q37","epeios"],
+	"keywords": ["extension","native","zndq","wrapper","q37","epeios"],
 	"homepage": "http://q37.info/tools/zndq",
 	"license": "AGPL",
     "authors": [
