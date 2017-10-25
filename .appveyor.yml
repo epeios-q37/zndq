@@ -21,14 +21,17 @@ install:
 - cinst -y php
 
 before_build:
+# Setting environment variables for the PHPH build procedure.
 - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
 - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 - dir
 - dir C:\tools\php71
 - dir C:\tools\php71\dev
+# Retrieving and installing PHP source code.
 - curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
 - 7z x php.tgz
 - 7z x php.tar
+# Creation of some files needed by the compilation of the extension
 - cd php-src-php-7.1.10
 - buildconf.bat --add-modules-dir=c:\projects\zndq
 - configure.bat

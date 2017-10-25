@@ -1,0 +1,19 @@
+{
+    "name": "q37/zndq",
+    "type": "library",
+    "description": "PHP extension wrapper",
+	"keywords": ["addon","native","C++","zndq","wrapper","q37","epeios"],
+	"homepage": "http://q37.info/tools/zndq",
+	"license": "AGPL",
+    "authors": [
+        {
+            "name": "Claude SIMON",
+            "contact": "http://q37.info/contact/",
+            "homepage": "http://q37.info/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+    }
+}
