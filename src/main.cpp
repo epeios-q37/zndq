@@ -50,9 +50,9 @@ namespace{
 		BaseFlow.Init( Info );
 		Flow.Init( BaseFlow );
 
-		Flow << sclmisc::SCLMISCProductName << " v" << VERSION << " - PHP v" << PHP_VERSION 
+		Flow << sclmisc::SCLMISCProductName << " v" << VERSION << " - PHP v" << PHP_VERSION << ", API v" <<  PHP_API_VERSION
 #ifdef CPE_S_WIN
-			", Compiler ID: " PHP_COMPILER_ID
+			<< ", Compiler ID: " PHP_COMPILER_ID
 #endif
 			<< txf::nl << txf::pad << "Build : " __DATE__ " " __TIME__ " (" <<  cpe::GetDescription() << ')';
 	qRR

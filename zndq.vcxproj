@@ -25,7 +25,7 @@
   <Import Project="Windows.targets"/>
   <Import Project="Details.props"/>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>882b928e-b9ba-4613-82bf-28185514520b</ProjectGuid>
+    <ProjectGuid>ab0aa541-32de-40e4-90d3-2c7a11061b00</ProjectGuid>
     <RootNamespace>zndq</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
