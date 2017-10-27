@@ -25,7 +25,7 @@
   <Import Project="Windows.targets"/>
   <Import Project="Details.props"/>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>54b105b5-6176-4c68-8b10-84fd1f9ae1dd</ProjectGuid>
+    <ProjectGuid>6ae154da-0ab8-4862-86cf-5264d44e043c</ProjectGuid>
     <RootNamespace>zndq</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
@@ -130,17 +130,17 @@
     <ClCompile Include="src/epeios/xtf.cpp"/>
     <ClCompile Include="src/epeios/llio.cpp"/>
     <ClCompile Include="src/epeios/wllio.cpp"/>
-    <ClCompile Include="src/epeios/sclargmnt.cpp"/>
-    <ClCompile Include="src/epeios/sclmisc.cpp"/>
-    <ClCompile Include="src/epeios/sclerror.cpp"/>
-    <ClCompile Include="src/epeios/scllocale.cpp"/>
-    <ClCompile Include="src/epeios/sclrgstry.cpp"/>
     <ClCompile Include="src/epeios/dlbrry.cpp"/>
     <ClCompile Include="src/epeios/n4all.cpp"/>
     <ClCompile Include="src/epeios/n4allw.cpp"/>
     <ClCompile Include="src/epeios/n4znd.cpp"/>
     <ClCompile Include="src/epeios/plgn.cpp"/>
     <ClCompile Include="src/epeios/plgncore.cpp"/>
+    <ClCompile Include="src/epeios/sclargmnt.cpp"/>
+    <ClCompile Include="src/epeios/sclmisc.cpp"/>
+    <ClCompile Include="src/epeios/sclerror.cpp"/>
+    <ClCompile Include="src/epeios/scllocale.cpp"/>
+    <ClCompile Include="src/epeios/sclrgstry.cpp"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
 </Project>

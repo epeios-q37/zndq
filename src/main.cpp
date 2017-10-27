@@ -94,13 +94,18 @@ namespace {
 	{
 	qRH;
 		str::wString ComponentFilename;
+		bso::sBool SkipComponentUnloading = false;	// When at 'true', the component is unloading when program quitting, not explicitly.
 	qRB;
 		sclargmnt::FillRegistry( Arguments, sclargmnt::faIsArgument, sclargmnt::uaReport );
 
 		ComponentFilename.Init();
 		sclmisc::MGetValue( registry::parameter::ComponentFilename, ComponentFilename );
 
-		n4allw::Register( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_ );
+#ifdef CPE_S_GNULINUX
+		SkipComponentUnloading = true;	// Temporary workaround (I hope) to avoid 'SegFault' under 'GNU/Linux'.
+#endif
+
+		n4allw::Register( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_, SkipComponentUnloading );
 	qRR;
 	qRT;
 	qRE;
