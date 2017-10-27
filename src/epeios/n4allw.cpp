@@ -107,12 +107,14 @@ namespace {
 		fnm::name___ Location;
 		TOL_CBUFFER___ Buffer;
 	qRB
+		cio::COut << __LOC__ << txf::nl << txf::commit;
 		Location.Init();
 		fnm::GetLocation( ComponentFilename, Location );
 		Data.Init( Rack, Location, str::wString(), UP );
 
 		//		cio::COut << __LOC__ << AddonFilename << txf::nl << txf::commit;
 
+		cio::COut << __LOC__ << ComponentFilename << ' ' << Location <<  txf::nl << txf::commit;
 		Library_.Init( ComponentFilename, Normalization );
 
 		if ( SkipComponentUnloading )
@@ -126,6 +128,9 @@ namespace {
 			qRReturn;
 
 		SetLauncher( Register( &Registrar, &Data ) );
+
+		cio::COut << __LOC__ << txf::nl << txf::commit;
+
 
 		Success = true;
 	qRR
