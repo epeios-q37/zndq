@@ -29,6 +29,16 @@
 
 using namespace main;
 
+namespace {
+	n4allw::rLauncher &GetLauncher_( zend_long Launcher )
+	{
+		if ( Launcher == 0 )
+			qRGnr();
+
+		return *(n4allw::rLauncher *)Launcher;
+	}
+}
+
 namespace{
 	err::err___ Error_;
 	sclerror::rError SCLError_;
@@ -45,7 +55,7 @@ namespace{
 	{
 	qRH
 		flx::rStringOFlow BaseFlow;
-		txf::sOFlow Flow;
+		txf::sWFlow Flow;
 	qRB
 		BaseFlow.Init( Info );
 		Flow.Init( BaseFlow );
@@ -67,7 +77,9 @@ void main::ThrowGenericError( void )
 	qRGnr();
 }
 
-void main::Init( void )
+void main::Init(
+	const char *RawLocation,
+	size_t Length )
 {
 qRFH;
 	str::wString Location;
@@ -76,8 +88,9 @@ qRFB;
 	Rack_.Init( Error_, SCLError_, cio::GetSet( cio::t_Default ), Locale_ );
 
 	Location.Init();
-	// TODO : Find a way to fill 'Location' with the path of the binary.
+	Location.Append( RawLocation, Length );
 
+//	cio::COut << ">>>>>" << txf::pad << Location << txf::nl << txf::commit;
 
 	sclmisc::Initialize( Rack_, Location );
 qRFR;
@@ -90,8 +103,9 @@ namespace {
 		n4znd::gShared Shared_;
 	}
 
-	void Register_( const str::dString &Arguments )
+	n4allw::rLauncher *Register_( const str::dString &Arguments )
 	{
+		n4allw::rLauncher *Launcher = NULL;
 	qRH;
 		str::wString ComponentFilename;
 		bso::sBool SkipComponentUnloading = false;	// When at 'true', the component is unloading when program quitting, not explicitly.
@@ -104,18 +118,26 @@ namespace {
 #ifdef CPE_S_GNULINUX
 		SkipComponentUnloading = true;	// Temporary workaround (I hope) to avoid 'SegFault' under 'GNU/Linux'.
 #endif
+		Launcher = new n4allw::rLauncher;
 
-		n4allw::Register( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_, SkipComponentUnloading );
+		if ( Launcher == NULL )
+			qRAlc();
+
+		Launcher->Init( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_, SkipComponentUnloading );
 	qRR;
+		if ( Launcher != NULL )
+			delete Launcher;
 	qRT;
 	qRE;
+		return Launcher;
 	}
 }
 
-void main::Register(
+zend_long main::Register(
 	const char *RawArguments,
 	size_t Length )
 {
+	zend_long Launcher = 0;
 qRFH;
 	str::wString Arguments;
 qRFB;
@@ -123,10 +145,11 @@ qRFB;
 
 	Arguments.Append( RawArguments, Length );
 
-	Register_( Arguments );
+	Launcher = (zend_long)Register_( Arguments );
 qRFR;
 qRFT;
 qRFE( ERRFinal_() );
+	return Launcher;
 }
 
 const char *main::WrapperInfo( void )
@@ -149,7 +172,7 @@ qRE;
 	return Buffer;
 }
 
-const char *main::ComponentInfo( void )
+const char *main::ComponentInfo( zend_long Launcher )
 {
 	static char Buffer[1000];
 qRFH;
@@ -157,8 +180,7 @@ qRFH;
 qRFB;
 	Info.Init();
 
-	if ( !n4allw::GetLauncherInfo( Info ) )
-		sclmisc::GetBaseTranslation( "NoRegisteredComponent", Info );
+	GetLauncher_( Launcher ).GetInfo( Info );
 
 	if ( Info.Amount() >= sizeof( Buffer ) )
 		qRLmt();
@@ -184,7 +206,7 @@ namespace {
 		String.Append( Z_STRVAL( Val ), Z_STRLEN( Val ) );
 	}
 
-	typedef fdr::rIODressedDriver rDriver_;
+	typedef fdr::rRWDressedDriver rDriver_;
 
 	class rStream_
 	: public rDriver_
@@ -243,7 +265,7 @@ namespace {
 
 	void Get_(
 		zval &Val,
-		fdr::rIODriver *&Driver )
+		fdr::rRWDriver *&Driver )
 	{
 	qRH;
 		php_stream *RawStream = NULL;
@@ -291,6 +313,38 @@ namespace {
 			qRGnr();
 	}
 
+	void Get_(
+		zend_array *Array,
+		str::dStrings &Strings )
+	{
+	qRH;
+		uint32_t Index = 0;
+		str::wString String;
+	qRB;
+		while ( Index < Array->nNumOfElements ) {
+			String.Init();
+
+			Get_( Array->arData[Index].val, String );
+
+			Strings.Append( String );
+
+			Index++;
+		}
+	qRR;
+	qRT;
+	qRE;
+	}
+
+	void Get_(
+		zval &Val,
+		str::dStrings &Strings )
+	{
+		if ( Z_TYPE( Val ) != IS_ARRAY )
+			qRGnr();
+
+		Get_( Z_ARRVAL( Val ), Strings );
+	}
+
 	template <typename type> inline void Get_(
 		zval *varargs,
 		int Index,
@@ -307,6 +361,25 @@ namespace {
 		int num_varargs_;
 		zval *varargs_;
 		zval *return_value_;
+		void SetReturnValue_( const str::dStrings &Strings )
+		{
+		qRH;
+			sdr::sRow Row = qNIL;
+			qCBUFFERr Buffer;
+		qRB;
+			array_init( return_value_ );
+
+			Row = Strings.First();
+
+			while ( Row != qNIL ) {
+				add_index_stringl( return_value_, *Row, Strings( Row ).Convert( Buffer ), Strings( Row ).Amount() );
+
+				Row = Strings.Next( Row );
+			}
+		qRR;
+		qRT;
+		qRE;
+		}
 	protected:
 		virtual void N4ALLGetArgument(
 			bso::sU8 Index,
@@ -321,13 +394,16 @@ namespace {
 				Get_<str::dString>( varargs_, Index, Value );
 				break;
 			case n4znd::tStream:
-				Get_<fdr::rIODriver *>( varargs_, Index, Value );
+				Get_<fdr::rRWDriver *>( varargs_, Index, Value );
 				break;
 			case n4znd::tLong:
 				Get_<bso::sS64>( varargs_, Index, Value );
 				break;
 			case n4znd::tBool:
 				Get_<bso::sBool>( varargs_, Index, Value );
+				break;
+			case n4znd::tStrings:
+				Get_<str::dStrings>( varargs_, Index, Value );
 				break;
 			default:
 				qRGnr();
@@ -350,6 +426,9 @@ namespace {
 				break;
 			case n4znd::tBool:
 				ZVAL_BOOL( return_value_, *( bso::sBool * )Value );
+				break;
+			case n4znd::tStrings:
+				SetReturnValue_( *(str::dStrings *)Value );
 				break;
 			default:
 				qRGnr();
@@ -384,7 +463,8 @@ namespace {
 
 }
 
-void main::Launch(
+void main::Call(
+	zend_long Launcher,
 	zend_long Index,
 	int num_varargs,
 	zval *varargs,
@@ -399,7 +479,7 @@ qRFB;
 #else
 	Caller.Init( NULL, num_varargs, varargs, return_value );	// 'tsrm_ls' no more available in 'ZTS' !?
 #endif
-	n4allw::Launch( Index, Caller );
+	GetLauncher_( Launcher ).Call( NULL, Index, Caller );
 qRFR;
 qRFT;
 qRFE( ERRFinal_() );

@@ -40,13 +40,16 @@
 namespace main {
 	void ThrowGenericError( void );
 
-	void Init( void );
-	void Register(
+	void Init(
+		const char *RawLocation,
+		  size_t Length );
+	zend_long Register(
 		const char *Arguments,
 		size_t ArgumentsLength );
 	const char *WrapperInfo( void );
-	const char *ComponentInfo( void );
-	void Launch(
+	const char *ComponentInfo( zend_long Launcher  );
+	void Call(
+		zend_long Launcher,
 		zend_long Index,
 		int num_varargs,
 		zval *varargs,

@@ -32,7 +32,12 @@ and there are important differences with PHP 7. See http://wiki.php.net/phpng-up
 
 PHP_FUNCTION( zndq_init )
 {
-	main::Init();
+	zend_string *String;
+
+	if ( zend_parse_parameters( ZEND_NUM_ARGS() TSRMLS_CC, "S", &String ) != SUCCESS )
+		main::ThrowGenericError();
+
+	main::Init( String->val, String->len );
 }
 
 PHP_FUNCTION( zndq_wrapper_info )
@@ -42,7 +47,12 @@ PHP_FUNCTION( zndq_wrapper_info )
 
 PHP_FUNCTION( zndq_component_info )
 {
-	RETURN_STRING( main::ComponentInfo() );
+	zend_long Launcher = 0;
+
+	if ( zend_parse_parameters( ZEND_NUM_ARGS() TSRMLS_CC, "l", &Launcher ) != SUCCESS )
+		main::ThrowGenericError();
+
+	RETURN_STRING( main::ComponentInfo( Launcher ) );
 }
 
 PHP_FUNCTION( zndq_register )
@@ -53,19 +63,19 @@ PHP_FUNCTION( zndq_register )
 		main::ThrowGenericError();
 
 	// 'String->val' contains a list of arguments, as defined in the configuration file for the 'Launch' command.
-	main::Register( String->val, String->len );
+	RETURN_LONG( main::Register( String->val, String->len ) )
 }
 
-PHP_FUNCTION( zndq_wrapper )
+PHP_FUNCTION( zndq_call )
 {
-	zend_long Index = 0;
+	zend_long Launcher = 0, Index = 0;
 	int num_varargs;
 	zval *varargs = NULL;
 
-	if ( zend_parse_parameters( ZEND_NUM_ARGS() TSRMLS_CC, "l*", &Index, &varargs, &num_varargs ) != SUCCESS )
+	if ( zend_parse_parameters( ZEND_NUM_ARGS() TSRMLS_CC, "ll*", &Launcher, &Index, &varargs, &num_varargs ) != SUCCESS )
 		main::ThrowGenericError();
 
-	main::Launch( Index, num_varargs, varargs, return_value TSRMLS_CC );
+	main::Call( Launcher, Index, num_varargs, varargs, return_value TSRMLS_CC );
 }
 
 
@@ -77,7 +87,7 @@ static zend_function_entry zndq_functions[] = {
 	PHP_FE( zndq_register, NULL )
 	PHP_FE( zndq_wrapper_info, NULL )
 	PHP_FE( zndq_component_info, NULL )
-	PHP_FE( zndq_wrapper, NULL )
+	PHP_FE( zndq_call, NULL )
 {
 	NULL, NULL, NULL
 }
