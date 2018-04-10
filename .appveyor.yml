@@ -13,28 +13,28 @@ platform:
 configuration: Release
 
 os :
-- Visual Studio 2017
-# - Visual Studio 2015
+# - Visual Studio 2017
+- Visual Studio 2015
 # - Visual Studio 2013
 
 # https://help.appveyor.com/discussions/problems/5616-not-able-to-build-due-to-problem-in-chocolateyinstallps1#comment_41949965
 install: 
 - ps: Set-Service wuauserv -StartupType Manual
-- cinst -y php
+- cinst -y php 7.1.10
 
 before_build:
 # Setting environment variables for the PHP build procedure.
-# - call "C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /x64
-- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+- call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+- call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 - dir
-- dir C:\tools\php72
-- dir C:\tools\php72\dev
+- dir C:\tools\php71
+- dir C:\tools\php71\dev
 # Retrieving and installing PHP source code.
-- curl -L https://github.com/php/php-src/archive/php-7.2.3.tar.gz --output php.tgz
+- curl -L https://github.com/php/php-src/archive/php-7.1.10.tar.gz --output php.tgz
 - 7z x php.tgz
 - 7z x php.tar
 # Creation of some files needed by the compilation of the extension
-- cd php-src-php-7.2.3
+- cd php-src-php-7.1.10
 - buildconf.bat --add-modules-dir=c:\projects\zndq
 - configure.bat
 # We do not build from the source (no 'nmake'), as we use the already installed PHP binaries.
@@ -44,7 +44,7 @@ before_build:
 - cd ..
 
 test_script:
-- echo "***** 'ZNDq' TEST BEGIN *****" && C:\tools\php72\php -dextension=./zndq.dll test.php && echo "***** 'ZNDq' TEST END *****"
+- echo "***** 'ZNDq' TEST BEGIN *****" && C:\tools\php71\php -dextension=./zndq.dll test.php && echo "***** 'ZNDq' TEST END *****"
 
 # matrix:
   # allow_failures:
