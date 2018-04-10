@@ -20,7 +20,7 @@ os :
 # https://help.appveyor.com/discussions/problems/5616-not-able-to-build-due-to-problem-in-chocolateyinstallps1#comment_41949965
 install: 
 - ps: Set-Service wuauserv -StartupType Manual
-- cinst -y php 7.1.11
+- cinst -y php --version 7.1.11
 
 before_build:
 # Setting environment variables for the PHP build procedure.
