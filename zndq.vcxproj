@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xpp="http://q37.info/xppq" DefaultTargets="Build">
   <PropertyGroup Label="UserMacros">
-    <PHPSrc>php-src-php-7.1.10</PHPSrc>
-    <PHP>C:\tools\php71</PHP>
+    <PHPSrc>php-src-php-7.2.3</PHPSrc>
+    <PHP>C:\tools\php72</PHP>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -25,7 +25,7 @@
   <Import Project="Windows.targets"/>
   <Import Project="Details.props"/>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>115f3f5a-ea61-415b-acba-7548e86efd48</ProjectGuid>
+    <ProjectGuid>6d8f4d37-a4d9-4554-9527-652f850ead78</ProjectGuid>
     <RootNamespace>zndq</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
