@@ -24,11 +24,11 @@ install:
 
 before_build:
 # Setting environment variables for the PHP build procedure.
-- call "C:\Program Files\Microsoft SDKs\Windows\v7.2\Bin\SetEnv.cmd" /x64
+- call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
 - call "C:\Program Files (x86)\Microsoft Visual Studio 15.0\VC\vcvarsall.bat" x86_amd64
 - dir
-- dir C:\tools\php71
-- dir C:\tools\php71\dev
+- dir C:\tools\php72
+- dir C:\tools\php72\dev
 # Retrieving and installing PHP source code.
 - curl -L https://github.com/php/php-src/archive/php-7.2.3.tar.gz --output php.tgz
 - 7z x php.tgz
@@ -44,7 +44,7 @@ before_build:
 - cd ..
 
 test_script:
-- echo "***** 'ZNDq' TEST BEGIN *****" && C:\tools\php71\php -dextension=./zndq.dll test.php && echo "***** 'ZNDq' TEST END *****"
+- echo "***** 'ZNDq' TEST BEGIN *****" && C:\tools\php72\php -dextension=./zndq.dll test.php && echo "***** 'ZNDq' TEST END *****"
 
 # matrix:
   # allow_failures:
