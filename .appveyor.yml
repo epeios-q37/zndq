@@ -77,7 +77,8 @@ after_build:
 - 7z a -ttar -so dummy %dir% | 7z a -si %addon%.tar.gz
 
 artifacts:
-- path: '*.zip'
+- name: zip
+  path: '*.zip'
 - name: tgz
   path: '*.tar.gz'
 
@@ -101,7 +102,7 @@ deploy:
       secure: kKebvPLjikQbZ7E1Vm8omoYc9K0wOcKxjWsglp3+D4fV9ev/FaWr8ZBI+AseOTis
     draft: false
     prerelease: false
-    artifact: '*.zip'
+    artifact: zip
     on:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
