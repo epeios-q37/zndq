@@ -92,7 +92,7 @@ deploy:
     prerelease: false
     artifact: tgz
     on:
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
   - provider: GitHub
     tag: v$(version)
@@ -103,5 +103,5 @@ deploy:
     prerelease: false
     artifact: $(zip)
     on:
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
