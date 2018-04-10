@@ -24,8 +24,8 @@ install:
 
 before_build:
 # Setting environment variables for the PHP build procedure.
-- call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
-- call "C:\Program Files (x86)\Microsoft Visual Studio 15.0\VC\vcvarsall.bat" x86_amd64
+# - call "C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /x64
+- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
 - dir
 - dir C:\tools\php72
 - dir C:\tools\php72\dev
