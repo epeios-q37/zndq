@@ -60,7 +60,7 @@ namespace{
 		BaseFlow.Init( Info );
 		Flow.Init( BaseFlow );
 
-		Flow << sclmisc::SCLMISCProductName << " v" << VERSION << " - PHP v" << PHP_VERSION << ", API v" <<  PHP_API_VERSION
+		Flow << sclmisc::GetProductName() << " v" << VERSION << " - PHP v" << PHP_VERSION << ", API v" <<  PHP_API_VERSION
 #ifdef CPE_S_WIN
 			<< ", Compiler ID: " PHP_COMPILER_ID
 #endif
@@ -485,11 +485,10 @@ qRFT;
 qRFE( ERRFinal_() );
 }
 
-const char *sclmisc::SCLMISCTargetName = NAME_LC;
-const char *sclmisc::SCLMISCProductName = NAME_MC;
-
 qGCTOR( njsq )
 {
+	sclmisc::SetTargetName( NAME_LC );
+	sclmisc::SetProductName( NAME_MC );
 	Error_.Init();
 	SCLError_.Init();
 	Locale_.Init();
