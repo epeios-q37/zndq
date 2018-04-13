@@ -1,6 +1,6 @@
 {
   "name": "zndq",
-  "version": "2018.4.13+a",
+  "version": "2018.4.14",
   "author": "Claude SIMON (http://q37.info/contact/)",
   "description": "PHP extension wrapper",
   "main": "ZNDq.js",
