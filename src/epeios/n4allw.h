@@ -46,7 +46,8 @@ namespace n4allw {
 			const fnm::rName &ComponentFilename,
 			dlbrry::eNormalization Normalization,
 			n4all::cRegistrar &Registrar,
-			sclmisc::sRack & Rack,
+			sclmisc::sRack &Rack,
+			const sclmisc::sInfo &Info,
 			void * UP,
 			bso::sBool SkipComponentUnloading );
 	public:
@@ -72,6 +73,7 @@ namespace n4allw {
 			const fnm::rName &ComponentFilename,
 			dlbrry::eNormalization Normalization,
 			sclmisc::sRack &Rack,
+			const sclmisc::sInfo &Info,
 			void *UP,
 			bso::sBool SkipComponenentUnloading,	// The component will be unloaded when quitting the program, and not explicitly (at true only for a 'PHP' workaround under 'GNU/Linux').
 			qRPD );

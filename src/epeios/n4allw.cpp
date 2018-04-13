@@ -71,6 +71,7 @@ bso::bool__ n4allw::rLauncher::Register_(
 	dlbrry::eNormalization Normalization,
 	n4all::cRegistrar &Registrar,
 	sclmisc::sRack &Rack,
+	const sclmisc::sInfo &Info,
 	void *UP,
 	bso::sBool SkipComponentUnloading )
 {
@@ -101,7 +102,7 @@ qRB
 	if ( Launcher_ != NULL )
 		qRGnr();
 
-	Launcher_ = Register( &Registrar, &Data );
+	Launcher_ = Register( &Registrar, &Data, Info );
 
 	Success = true;
 qRR
@@ -114,6 +115,7 @@ bso::sBool n4allw::rLauncher::Init(
 	const fnm::rName &ComponentFilename,
 	dlbrry::eNormalization Normalization,
 	sclmisc::sRack &Rack,
+	const sclmisc::sInfo &Info,
 	void *UP,
 	bso::sBool SkipComponentUnloading,
 	qRPN )
@@ -125,7 +127,7 @@ qRB;
 	Functions_.Init();
 	Registrar.Init( Functions_ );
 
-	if ( !Register_( ComponentFilename, Normalization, Registrar, Rack, UP, SkipComponentUnloading ) ) {
+	if ( !Register_( ComponentFilename, Normalization, Registrar, Rack, Info, UP, SkipComponentUnloading ) ) {
 		if ( qRP == err::hThrowException )
 			qRFwk();
 	} else

@@ -60,7 +60,7 @@ namespace{
 		BaseFlow.Init( Info );
 		Flow.Init( BaseFlow );
 
-		Flow << sclmisc::GetProductName() << " v" << VERSION << " - PHP v" << PHP_VERSION << ", API v" <<  PHP_API_VERSION
+		Flow << zndq::Info.Target() << " v" << VERSION << " - PHP v" << PHP_VERSION << ", API v" <<  PHP_API_VERSION
 #ifdef CPE_S_WIN
 			<< ", Compiler ID: " PHP_COMPILER_ID
 #endif
@@ -92,7 +92,7 @@ qRFB;
 
 //	cio::COut << ">>>>>" << txf::pad << Location << txf::nl << txf::commit;
 
-	sclmisc::Initialize( Rack_, Location );
+	sclmisc::Initialize( Rack_, Location, zndq::Info );
 qRFR;
 qRFT;
 qRFE( ERRFinal_() );
@@ -123,7 +123,7 @@ namespace {
 		if ( Launcher == NULL )
 			qRAlc();
 
-		Launcher->Init( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_, SkipComponentUnloading );
+		Launcher->Init( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, zndq::Info, &Shared_, SkipComponentUnloading );
 	qRR;
 		if ( Launcher != NULL )
 			delete Launcher;
@@ -487,8 +487,6 @@ qRFE( ERRFinal_() );
 
 qGCTOR( njsq )
 {
-	sclmisc::SetTargetName( NAME_LC );
-	sclmisc::SetProductName( NAME_MC );
 	Error_.Init();
 	SCLError_.Init();
 	Locale_.Init();
