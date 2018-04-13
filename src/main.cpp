@@ -123,7 +123,7 @@ namespace {
 		if ( Launcher == NULL )
 			qRAlc();
 
-		Launcher->Init( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, zndq::Info, &Shared_, SkipComponentUnloading );
+		Launcher->Init( ComponentFilename, dlbrry::nPrefixAndExt, Rack_, &Shared_, SkipComponentUnloading );
 	qRR;
 		if ( Launcher != NULL )
 			delete Launcher;

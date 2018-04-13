@@ -1,7 +1,7 @@
 # zndq.appveyor
 
 environment:
-  version: 20180413
+  version: 20180413+a
   affix: zndq
 
 platform:
